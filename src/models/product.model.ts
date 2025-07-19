@@ -1,10 +1,11 @@
 export interface Product {
   title: string;
-  price: string;
-  product_url: string;
-  quantity_reviews: number;
-  stars: number;
-  seller: string | null;
+  price: number;
+  anchor_price: number;
+  product_url: string | null;
+  brand: string;
+  picture: string | null;
   free_shipping: boolean;
-  pictures: string;
+  quantity_reviews: number | null;
+  stars: number | null;
 }

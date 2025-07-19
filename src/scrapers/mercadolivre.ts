@@ -1,6 +1,17 @@
 import { chromium } from 'playwright';
 import { Product } from '../models/product.model';
 
+// functions
+import getPrice from '../functions/getPrice';
+import getAnchorPrice from '../functions/getAnchorPrice';
+import getTitle from '../functions/getTitle';
+import getProductLink from '../functions/getProductLink';
+import getBrandName from '../functions/getBrandName';
+import getPicture from '../functions/getPicture';
+import getIsFreeShipping from '../functions/getIsFreeShipping';
+import getStarsReview from '../functions/getStarsReview';
+import getQuantityReviews from '../functions/getQuantityReviews';
+
 export async function scrapeMercadoLivre(url: string): Promise<Product[]> {
   const browser = await chromium.launch({ headless: true });
   const page = await browser.newPage();
@@ -18,16 +29,26 @@ export async function scrapeMercadoLivre(url: string): Promise<Product[]> {
   for (let i = 0; i < count; i++) {
     const card = cards.nth(i);
 
-    const title = await card.locator('.poly-card__content .poly-component__title-wrapper .poly-component__title').innerText();
-    const price = await card.locator('.andes-money-amount--cents-superscript').innerText();
-    const product_url = await card.locator('.poly-card__content h3.poly-component__title-wrapper a.poly-component__title').getAttribute('href');
-    const seller = '';
-    const picture = '';
-    const free_shipping = true;
-    const stars = 5;
-    const quantity_reviews = 5;
+    // title
+    const title: string = await getTitle(card);
+    // full price
+    const price: number = await getPrice(card);
+    // old price
+    const anchor_price: number = await getAnchorPrice(card);
+    // product url
+    const product_url: string | null = await getProductLink(card);
+    // brand name
+    const brand: string = await getBrandName(card);
+    // picture
+    const picture: string | null = await getPicture(card);
+    // bool free shipping
+    const free_shipping: boolean = await getIsFreeShipping(card);
+    // number stars reviews
+    const stars: number | null = await getStarsReview(card);
+    // quantity reviews
+    const quantity_reviews: number | null = await getQuantityReviews(card);
 
-    products.push({ title, price, (product_url ?? ''), quantity_reviews, stars, seller, free_shipping, picture });
+    products.push({ title, price, anchor_price, product_url, brand, picture, free_shipping, quantity_reviews, stars });
   }
 
   await browser.close();

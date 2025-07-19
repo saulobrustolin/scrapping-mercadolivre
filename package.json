@@ -13,6 +13,7 @@
     "@types/node": "^24.0.14"
   },
   "dependencies": {
+    "chalk": "^5.4.1",
     "ora": "^8.2.0",
     "typescript": "^5.8.3"
   }
