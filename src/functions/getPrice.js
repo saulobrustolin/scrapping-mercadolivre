@@ -23,6 +23,6 @@ function getPrice(card) {
             cents = '0';
         }
         // return full price
-        return Number(int) + Number(cents);
+        return Number(int + "." + cents);
     });
 }

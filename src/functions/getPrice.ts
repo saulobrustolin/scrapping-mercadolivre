@@ -13,5 +13,5 @@ export default async function getPrice(card: Locator): Promise<number> {
     }
 
     // return full price
-    return Number(int) + Number(cents)
+    return Number(int + "." + cents)
 }

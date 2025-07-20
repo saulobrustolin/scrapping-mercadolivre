@@ -22,6 +22,6 @@ function getAnchorPrice(card) {
         catch (_a) {
             cents = '0';
         }
-        return Number(int) + Number(cents);
+        return Number(int + "." + cents);
     });
 }

@@ -42,17 +42,19 @@ function scrapeMercadoLivre(url, logger) {
         const products = [];
         for (let i = 0; i < count; i++) {
             const card = cards.nth(i);
-            // logger.refresh(`🔎 Iniciando raspagem do produto "${i + 1}"!`);
-            logger.info(`Raspando produto: "${i}"`);
+            logger.refresh(`🔎 Iniciando raspagem do produto "${i}"!`);
+            logger.info(`Raspando produto: "${i + 1}"`);
             // title
             const title = yield (0, getTitle_1.default)(card);
             logger.succeed("Título capturado!");
             // full price
             const price = yield (0, getPrice_1.default)(card);
             logger.succeed("Preço capturado!");
+            logger.info(String(price));
             // old price
             const anchor_price = yield (0, getAnchorPrice_1.default)(card);
             logger.succeed("Preço de ancoragem capturado!");
+            logger.info(String(anchor_price));
             // product url
             const product_url = yield (0, getProductLink_1.default)(card);
             logger.succeed("Endereço do produto capturado!");
@@ -72,7 +74,7 @@ function scrapeMercadoLivre(url, logger) {
             const quantity_reviews = yield (0, getQuantityReviews_1.default)(card);
             logger.succeed("Quantidade de avaliações capturada!");
             products.push({ title, price, anchor_price, product_url, brand, picture, free_shipping, quantity_reviews, stars });
-            logger.info('Salvando no banco de dados...');
+            logger.info('Salvando produtos no banco de dados...');
             (0, insert_1.insertProduct)(title, price, anchor_price, product_url, brand, picture, free_shipping, quantity_reviews, stars);
             logger.succeed('Produto salvo com sucesso!');
         }

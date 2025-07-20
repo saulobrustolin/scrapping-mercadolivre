@@ -12,5 +12,5 @@ export default async function getAnchorPrice(card: Locator): Promise<number> {
         cents = '0'
     }
 
-    return Number(int) + Number(cents)
+    return Number(int + "." + cents)
 }
