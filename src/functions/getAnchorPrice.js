@@ -19,9 +19,8 @@ function getAnchorPrice(card) {
         try {
             cents = yield card.locator('div.poly-card__content > div.poly-component__price > s.andes-money-amount.andes-money-amount--previous.andes-money-amount--cents-comma > span.andes-money-amount__cents').innerText();
         }
-        catch (err) {
+        catch (_a) {
             cents = '0';
-            console.log(err);
         }
         return Number(int) + Number(cents);
     });

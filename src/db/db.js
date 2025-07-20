@@ -8,18 +8,20 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = getIsFreeShipping;
-function getIsFreeShipping(card) {
+exports.openDb = openDb;
+const sqlite3_1 = __importDefault(require("sqlite3"));
+const sqlite_1 = require("sqlite");
+// Habilita Promises no sqlite3
+sqlite3_1.default.verbose();
+function openDb() {
     return __awaiter(this, void 0, void 0, function* () {
-        let shipping = null;
-        try {
-            shipping = yield card.locator('div.poly-card__content > div.poly-component__shipping > span').innerText();
-        }
-        catch (_a) {
-            shipping = null;
-        }
-        const isFreeShipping = shipping != null && shipping === "Frete grátis" ? true : false;
-        return isFreeShipping;
+        return (0, sqlite_1.open)({
+            filename: './data/mercadolivre_products.db',
+            driver: sqlite3_1.default.Database
+        });
     });
 }

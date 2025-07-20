@@ -9,17 +9,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = getIsFreeShipping;
-function getIsFreeShipping(card) {
+exports.insertProduct = insertProduct;
+const db_1 = require("./db");
+function insertProduct(title, price, anchor_price, product_url, brand, picture, free_shipping, quantity_reviews, stars) {
     return __awaiter(this, void 0, void 0, function* () {
-        let shipping = null;
-        try {
-            shipping = yield card.locator('div.poly-card__content > div.poly-component__shipping > span').innerText();
-        }
-        catch (_a) {
-            shipping = null;
-        }
-        const isFreeShipping = shipping != null && shipping === "Frete grátis" ? true : false;
-        return isFreeShipping;
+        const db = yield (0, db_1.openDb)();
+        yield db.run(`
+    INSERT INTO products (title, price, anchor_price, product_url, brand, picture, free_shipping, quantity_reviews, stars)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `, [title, price, anchor_price, product_url, brand, picture, free_shipping, quantity_reviews, stars]);
+        console.log('Produto inserido com sucesso!');
     });
 }

@@ -12,6 +12,7 @@ import getIsFreeShipping from '../functions/getIsFreeShipping';
 import getStarsReview from '../functions/getStarsReview';
 import getQuantityReviews from '../functions/getQuantityReviews';
 import { Logger } from '../utils/logger';
+import { insertProduct } from '../db/insert';
 
 export async function scrapeMercadoLivre(url: string, logger: Logger): Promise<Product[]> {
   const browser = await chromium.launch({ headless: true });
@@ -66,6 +67,20 @@ export async function scrapeMercadoLivre(url: string, logger: Logger): Promise<P
     logger.succeed("Quantidade de avaliações capturada!")
 
     products.push({ title, price, anchor_price, product_url, brand, picture, free_shipping, quantity_reviews, stars });
+
+    logger.info('Salvando no banco de dados...')
+    insertProduct(
+      title,
+      price,
+      anchor_price,
+      product_url,
+      brand,
+      picture,
+      free_shipping,
+      quantity_reviews,
+      stars
+    )
+    logger.succeed('Produto salvo com sucesso!')
   }
 
   await browser.close();

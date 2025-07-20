@@ -24,6 +24,7 @@ const getPicture_1 = __importDefault(require("../functions/getPicture"));
 const getIsFreeShipping_1 = __importDefault(require("../functions/getIsFreeShipping"));
 const getStarsReview_1 = __importDefault(require("../functions/getStarsReview"));
 const getQuantityReviews_1 = __importDefault(require("../functions/getQuantityReviews"));
+const insert_1 = require("../db/insert");
 function scrapeMercadoLivre(url, logger) {
     return __awaiter(this, void 0, void 0, function* () {
         const browser = yield playwright_1.chromium.launch({ headless: true });
@@ -41,7 +42,7 @@ function scrapeMercadoLivre(url, logger) {
         const products = [];
         for (let i = 0; i < count; i++) {
             const card = cards.nth(i);
-            logger.refresh(`🔎 Iniciando raspagem do produto "${i}"!`);
+            // logger.refresh(`🔎 Iniciando raspagem do produto "${i + 1}"!`);
             logger.info(`Raspando produto: "${i}"`);
             // title
             const title = yield (0, getTitle_1.default)(card);
@@ -71,6 +72,9 @@ function scrapeMercadoLivre(url, logger) {
             const quantity_reviews = yield (0, getQuantityReviews_1.default)(card);
             logger.succeed("Quantidade de avaliações capturada!");
             products.push({ title, price, anchor_price, product_url, brand, picture, free_shipping, quantity_reviews, stars });
+            logger.info('Salvando no banco de dados...');
+            (0, insert_1.insertProduct)(title, price, anchor_price, product_url, brand, picture, free_shipping, quantity_reviews, stars);
+            logger.succeed('Produto salvo com sucesso!');
         }
         yield browser.close();
         return products;
