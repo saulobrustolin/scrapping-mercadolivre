@@ -34,7 +34,7 @@ export async function scrapeMercadoLivre(url: string, logger: Logger): Promise<P
   for (let i = 0; i < count; i++) {
     const card = cards.nth(i);
 
-    logger.refresh(`🔎 Iniciando raspagem do produto "${i + 1}"!`);
+    // logger.refresh(`🔎 Iniciando raspagem do produto "${i + 1}"!`);
     logger.info(`Raspando produto: "${i}"`)
 
     // title

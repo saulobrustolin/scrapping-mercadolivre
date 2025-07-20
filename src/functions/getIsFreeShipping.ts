@@ -1,9 +1,14 @@
 import { Locator } from "@playwright/test";
 
 export default async function getIsFreeShipping(card: Locator): Promise<boolean> {
-    const element = await card.locator('div.poly-card__content > div.poly-component__shipping > span').innerText();
+    let shipping = null
+    try {
+        shipping = await card.locator('div.poly-card__content > div.poly-component__shipping > span').innerText();
+    } catch {
+        shipping = null
+    }
 
-    const isFreeShipping = element != null && element === "Frete grátis"
+    const isFreeShipping = shipping != null && shipping === "Frete grátis" ? true : false
 
     return isFreeShipping
 }
