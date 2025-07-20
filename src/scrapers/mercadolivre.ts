@@ -35,7 +35,7 @@ export async function scrapeMercadoLivre(url: string, logger: Logger): Promise<P
   for (let i = 0; i < count; i++) {
     const card = cards.nth(i);
 
-    // logger.refresh(`🔎 Iniciando raspagem do produto "${i + 1}"!`);
+    logger.refresh(`🔎 Iniciando raspagem do produto "${i + 1}"!`);
     logger.info(`Raspando produto: "${i}"`)
 
     // title
@@ -68,7 +68,7 @@ export async function scrapeMercadoLivre(url: string, logger: Logger): Promise<P
 
     products.push({ title, price, anchor_price, product_url, brand, picture, free_shipping, quantity_reviews, stars });
 
-    logger.info('Salvando no banco de dados...')
+    logger.info('Salvando produtos no banco de dados...')
     insertProduct(
       title,
       price,

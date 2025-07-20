@@ -23,7 +23,7 @@ function sleep(ms: number) {
       logger.succeed('📁 Produtos salvos com sucesso!');
     } catch (err) {
       logger.fail(`❌ Erro durante a execução: ${(err as Error).message}`);
-    } 
+    }
 
     if (i < 20) {
       const delay = Math.floor(Math.random() * (180000 - 60000 + 1)) + 60000; // entre 1 e 3 minutos

@@ -18,6 +18,5 @@ function insertProduct(title, price, anchor_price, product_url, brand, picture, 
     INSERT INTO products (title, price, anchor_price, product_url, brand, picture, free_shipping, quantity_reviews, stars)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
   `, [title, price, anchor_price, product_url, brand, picture, free_shipping, quantity_reviews, stars]);
-        console.log('Produto inserido com sucesso!');
     });
 }
