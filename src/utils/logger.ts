@@ -39,4 +39,10 @@ export class Logger {
     stop() {
         this.spinner.stop();
     }
+
+    refresh(text: string) {
+        this.spinner.stop();
+        this.printHeader();
+        this.spinner = ora(text).start();
+    }
 }
