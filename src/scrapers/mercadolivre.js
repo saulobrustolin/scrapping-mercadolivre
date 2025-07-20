@@ -50,11 +50,9 @@ function scrapeMercadoLivre(url, logger) {
             // full price
             const price = yield (0, getPrice_1.default)(card);
             logger.succeed("Preço capturado!");
-            logger.info(String(price));
             // old price
             const anchor_price = yield (0, getAnchorPrice_1.default)(card);
             logger.succeed("Preço de ancoragem capturado!");
-            logger.info(String(anchor_price));
             // product url
             const product_url = yield (0, getProductLink_1.default)(card);
             logger.succeed("Endereço do produto capturado!");

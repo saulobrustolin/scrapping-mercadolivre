@@ -44,11 +44,9 @@ export async function scrapeMercadoLivre(url: string, logger: Logger): Promise<P
     // full price
     const price: number = await getPrice(card);
     logger.succeed("Preço capturado!")
-    logger.info(String(price))
     // old price
     const anchor_price: number = await getAnchorPrice(card);
     logger.succeed("Preço de ancoragem capturado!")
-    logger.info(String(anchor_price))
     // product url
     const product_url: string | null = await getProductLink(card);
     logger.succeed("Endereço do produto capturado!")
