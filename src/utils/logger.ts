@@ -6,9 +6,7 @@ const BRAND = chalk.bold.blue(`
   ▐█ ▀. ▐█ ▌▪▀▄ █·▐█ ▀█ ▐█ ▄█▐█ ▄███ •█▌▐█▐█ ▀ ▪
   ▄▀▀▀█▄██ ▄▄▐▀▀▄ ▄█▀▀█  ██▀· ██▀·▐█·▐█▐▐▌▄█ ▀█▄
   ▐█▄▪▐█▐███▌▐█•█▌▐█ ▪▐▌▐█▪·•▐█▪·•▐█▌██▐█▌▐█▄▪▐█
-   ▀▀▀▀ ·▀▀▀ .▀  ▀ ▀  ▀ .▀   .▀   ▀▀▀▀▀ █▪·▀▀▀▀     
-
-  by Saulo dev
+   ▀▀▀▀ ·▀▀▀ .▀  ▀ ▀  ▀ .▀   .▀   ▀▀▀▀▀ █▪·▀▀▀▀     by Saulo dev
    `);
 
 export class Logger {
@@ -21,7 +19,7 @@ export class Logger {
 
     private printHeader() {
         console.clear();
-        console.log(`${BRAND}\n${'-'.repeat(BRAND.length)}\n`);
+        console.log(`${BRAND}\n${'-'.repeat(40)}\n`);
     }
 
     update(text: string) {

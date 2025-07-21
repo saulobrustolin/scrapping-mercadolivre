@@ -6,7 +6,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Logger = void 0;
 const ora_1 = __importDefault(require("ora"));
 const chalk_1 = __importDefault(require("chalk"));
-const BRAND = chalk_1.default.bold.blue('🛒 MERCADO LIVRE SCRAPPING BOT - by Saulo Brustolin™');
+const BRAND = chalk_1.default.bold.blue(`
+  .▄▄ ·  ▄▄· ▄▄▄   ▄▄▄·  ▄▄▄· ▄▄▄·▪   ▐ ▄  ▄▄ • 
+  ▐█ ▀. ▐█ ▌▪▀▄ █·▐█ ▀█ ▐█ ▄█▐█ ▄███ •█▌▐█▐█ ▀ ▪
+  ▄▀▀▀█▄██ ▄▄▐▀▀▄ ▄█▀▀█  ██▀· ██▀·▐█·▐█▐▐▌▄█ ▀█▄
+  ▐█▄▪▐█▐███▌▐█•█▌▐█ ▪▐▌▐█▪·•▐█▪·•▐█▌██▐█▌▐█▄▪▐█
+   ▀▀▀▀ ·▀▀▀ .▀  ▀ ▀  ▀ .▀   .▀   ▀▀▀▀▀ █▪·▀▀▀▀     
+   `);
 class Logger {
     constructor(initialText = 'Iniciando...') {
         this.printHeader();
@@ -14,7 +20,7 @@ class Logger {
     }
     printHeader() {
         console.clear();
-        console.log(`${BRAND}\n${'-'.repeat(BRAND.length)}\n`);
+        console.log(`${BRAND}\n${'-'.repeat(40)}\n`);
     }
     update(text) {
         this.spinner.text = text;
