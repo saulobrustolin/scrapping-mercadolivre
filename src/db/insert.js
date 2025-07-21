@@ -11,12 +11,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.insertProduct = insertProduct;
 const db_1 = require("./db");
-function insertProduct(title, price, anchor_price, product_url, brand, picture, free_shipping, quantity_reviews, stars) {
+function insertProduct(title, price, anchor_price, product_url, brand, picture, free_shipping, quantity_reviews, stars, quantity_installments, value_installments) {
     return __awaiter(this, void 0, void 0, function* () {
         const db = yield (0, db_1.openDb)();
         yield db.run(`
-    INSERT INTO products (title, price, anchor_price, product_url, brand, picture, free_shipping, quantity_reviews, stars)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-  `, [title, price, anchor_price, product_url, brand, picture, free_shipping, quantity_reviews, stars]);
+    INSERT INTO products (title, price, anchor_price, product_url, brand, picture, free_shipping, quantity_reviews, stars, quantity_installments, value_installments)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `, [title, price, anchor_price, product_url, brand, picture, free_shipping, quantity_reviews, stars, quantity_installments, value_installments]);
     });
 }

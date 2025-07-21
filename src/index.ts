@@ -1,5 +1,4 @@
 import { scrapeMercadoLivre } from './scrapers/mercadolivre';
-import { saveProducts } from './services/storage.service';
 
 // logger
 import { Logger } from './utils/logger';
@@ -15,14 +14,11 @@ function sleep(ms: number) {
     logger.refresh(`🔎 Iniciando raspagem da página ${i}`);
 
     try {
-      const products = await scrapeMercadoLivre(`https://www.mercadolivre.com.br/ofertas?promotion_type=lightning&page=${i}`, logger);
-      logger.succeed('✅ Raspagem concluída!');
-      
-      logger.update('💾 Salvando produtos...');
-      await saveProducts(products, `mercadolivre_page_${i}.json`);
-      logger.succeed('📁 Produtos salvos com sucesso!');
+      await scrapeMercadoLivre(`https://www.mercadolivre.com.br/ofertas?promotion_type=lightning&page=${i}`, logger);
+      logger.succeed('✅ Raspagem concluída!');      
     } catch (err) {
       logger.fail(`❌ Erro durante a execução: ${(err as Error).message}`);
+      await sleep(30 * 1000); // 15 segundos
     }
 
     if (i < 20) {

@@ -12,7 +12,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = getTitle;
 function getTitle(card) {
     return __awaiter(this, void 0, void 0, function* () {
-        const title = yield card.locator('.poly-card__content > h3.poly-component__title-wrapper > a.poly-component__title').innerText();
+        const locator = yield card.locator('.poly-card__content > h3.poly-component__title-wrapper > a.poly-component__title');
+        yield locator.waitFor({ state: "attached" });
+        const title = locator.innerText();
         return title;
     });
 }

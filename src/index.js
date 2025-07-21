@@ -10,7 +10,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mercadolivre_1 = require("./scrapers/mercadolivre");
-const storage_service_1 = require("./services/storage.service");
 // logger
 const logger_1 = require("./utils/logger");
 function sleep(ms) {
@@ -21,14 +20,12 @@ function sleep(ms) {
     for (let i = 1; i < 20; i++) {
         logger.refresh(`🔎 Iniciando raspagem da página ${i}`);
         try {
-            const products = yield (0, mercadolivre_1.scrapeMercadoLivre)(`https://www.mercadolivre.com.br/ofertas?promotion_type=lightning&page=${i}`, logger);
+            yield (0, mercadolivre_1.scrapeMercadoLivre)(`https://www.mercadolivre.com.br/ofertas?promotion_type=lightning&page=${i}`, logger);
             logger.succeed('✅ Raspagem concluída!');
-            logger.update('💾 Salvando produtos...');
-            yield (0, storage_service_1.saveProducts)(products, `mercadolivre_page_${i}.json`);
-            logger.succeed('📁 Produtos salvos com sucesso!');
         }
         catch (err) {
             logger.fail(`❌ Erro durante a execução: ${err.message}`);
+            yield sleep(30 * 1000); // 15 segundos
         }
         if (i < 20) {
             const delay = Math.floor(Math.random() * (180000 - 60000 + 1)) + 60000; // entre 1 e 3 minutos

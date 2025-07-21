@@ -12,7 +12,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = getPicture;
 function getPicture(card) {
     return __awaiter(this, void 0, void 0, function* () {
-        const picture = yield card.locator('div.poly-card__portada > img.poly-component__picture').getAttribute('src');
+        const locator = yield card.locator('div.poly-card__portada > img.poly-component__picture');
+        yield locator.waitFor({ state: "attached" });
+        let picture = yield locator.getAttribute('src');
+        if (picture && picture.search('https://') == -1) {
+            picture = yield card.locator('div.poly-card__portada > img.poly-component__picture').getAttribute('data-src');
+        }
         return picture;
     });
 }

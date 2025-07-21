@@ -14,7 +14,9 @@ function getBrandName(card) {
     return __awaiter(this, void 0, void 0, function* () {
         let brand = '';
         try {
-            brand = yield card.locator('.poly-card__content > span.poly-component__brand').innerText();
+            const locator = yield card.locator('.poly-card__content > span.poly-component__brand');
+            yield locator.waitFor({ state: "attached" });
+            brand = yield locator.innerText();
         }
         catch (_a) {
             brand = '';

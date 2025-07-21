@@ -12,8 +12,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = getAnchorPrice;
 function getAnchorPrice(card) {
     return __awaiter(this, void 0, void 0, function* () {
+        const locator = yield card.locator('div.poly-card__content > div.poly-component__price > s.andes-money-amount.andes-money-amount--previous.andes-money-amount--cents-comma > span.andes-money-amount__fraction');
+        yield locator.waitFor({ state: "attached" });
         // int
-        const int = yield card.locator('div.poly-card__content > div.poly-component__price > s.andes-money-amount.andes-money-amount--previous.andes-money-amount--cents-comma > span.andes-money-amount__fraction').innerText();
+        const value_int = yield locator.innerText();
+        // tratament
+        const int = value_int.replace(/\./g, "");
         // cents
         let cents = '';
         try {

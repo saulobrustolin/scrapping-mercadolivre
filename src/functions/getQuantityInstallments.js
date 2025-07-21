@@ -9,13 +9,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = getQuantityReviews;
-function getQuantityReviews(card) {
+exports.default = getQuantityInstallments;
+function getQuantityInstallments(card) {
     return __awaiter(this, void 0, void 0, function* () {
-        const locator = yield card.locator('div.poly-card__content > div.poly-component__reviews > span.poly-reviews__total');
+        const locator = yield card.locator('div.poly-card__content > .poly-component__price > .poly-price__installments');
         yield locator.waitFor({ state: "attached" });
-        const quantity_reviews = yield locator.innerText();
-        const handle_string_quantity_reviews = quantity_reviews ? quantity_reviews.slice(1, -1) : null;
-        return Number(handle_string_quantity_reviews);
+        const text = yield locator.innerText();
+        const position = text === null || text === void 0 ? void 0 : text.search('x');
+        if (position && text) {
+            return Number(text === null || text === void 0 ? void 0 : text.substring(position - 2, position).trim());
+        }
+        return 0;
     });
 }

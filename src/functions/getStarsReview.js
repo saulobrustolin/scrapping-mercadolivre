@@ -12,7 +12,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = getStarsReview;
 function getStarsReview(card) {
     return __awaiter(this, void 0, void 0, function* () {
-        const stars = yield card.locator('div.poly-card__content > div.poly-component__reviews > span.poly-reviews__rating').innerText();
+        const locator = yield card.locator('div.poly-card__content > div.poly-component__reviews > span.poly-reviews__rating');
+        yield locator.waitFor({ state: "attached" });
+        const stars = yield locator.innerText();
         return Number(stars);
     });
 }

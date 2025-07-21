@@ -12,7 +12,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = getProductLink;
 function getProductLink(card) {
     return __awaiter(this, void 0, void 0, function* () {
-        const url = yield card.locator('div.poly-card__content > h3.poly-component__title-wrapper > a.poly-component__title').getAttribute('href');
+        const locator = yield card.locator('div.poly-card__content > h3.poly-component__title-wrapper > a.poly-component__title');
+        yield locator.waitFor({ state: "attached" });
+        const url = locator.getAttribute('href');
         return url;
     });
 }
